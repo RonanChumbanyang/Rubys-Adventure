@@ -18,12 +18,15 @@ public class Enemy : MonoBehaviour
 	Rigidbody2D rigidbody2d;
 	float remainingTimeToChange;
 	Vector2 direction = Vector2.right;
-	bool repaired = false;
+	public bool repaired = false;
 	
 	Animator animator;
 	
 	AudioSource audioSource;
-	
+
+
+	RubyController getRuby;
+
 	void Start ()
 	{
 		rigidbody2d = GetComponent<Rigidbody2D>();
@@ -34,6 +37,9 @@ public class Enemy : MonoBehaviour
 		animator = GetComponent<Animator>();
 
 		audioSource = GetComponent<AudioSource>();
+
+
+		getRuby = GameObject.FindGameObjectWithTag("Player").GetComponent<RubyController>();
 	}
 	
 	void Update()
@@ -64,9 +70,12 @@ public class Enemy : MonoBehaviour
 			return;
 		
 		RubyController controller = other.collider.GetComponent<RubyController>();
-		
-		if(controller != null)
+
+		if (controller != null)
+		{
+			getRuby.LosingHealth();
 			controller.ChangeHealth(-1);
+		}
 	}
 
 	public void Fix()

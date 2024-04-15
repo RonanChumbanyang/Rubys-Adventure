@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RubyController : MonoBehaviour
 {
@@ -32,7 +33,15 @@ public class RubyController : MonoBehaviour
     Vector2 lookDirection = new Vector2(1, 0);
     
     AudioSource audioSource;
-    
+
+
+    //MODDING
+    public GameObject losePanel;
+    private int preHealth;
+    public ParticleSystem healingParticle = null;
+    public ParticleSystem damagedParticle = null;
+
+
     void Start()
     {
 
@@ -87,6 +96,15 @@ public class RubyController : MonoBehaviour
                 }  
             }
         }
+
+
+
+        //MODDING
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+            losePanel.SetActive(true);
+        }
  
     }
 
@@ -117,8 +135,8 @@ public class RubyController : MonoBehaviour
         
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         
-        if(currentHealth == 0)
-            Respawn();
+        /*if(currentHealth == 0)
+            Respawn();*/
         
         UIHealthBar.Instance.SetValue(currentHealth / (float)maxHealth);
     }
@@ -143,5 +161,24 @@ public class RubyController : MonoBehaviour
     public void PlaySound(AudioClip clip)
     {
         audioSource.PlayOneShot(clip);
+    }
+
+
+
+    
+
+    //MODDING
+    public void LosingHealth()
+    {
+        var em = damagedParticle.emission;
+        em.enabled = true;
+        damagedParticle.Play();
+    }
+    public void GainingHealth()
+    {
+        var em = healingParticle.emission;
+        em.enabled = true;
+        healingParticle.Play();
+        
     }
 }
