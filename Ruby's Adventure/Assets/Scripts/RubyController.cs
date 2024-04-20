@@ -40,7 +40,7 @@ public class RubyController : MonoBehaviour
     private int preHealth;
     public ParticleSystem healingParticle = null;
     public ParticleSystem damagedParticle = null;
-
+    public float defaultSpeed;
 
     void Start()
     {
@@ -53,6 +53,9 @@ public class RubyController : MonoBehaviour
         animator = GetComponent<Animator>();
         
         audioSource = GetComponent<AudioSource>();
+
+
+        defaultSpeed = speed;
     }
 
     void Update()
@@ -81,10 +84,10 @@ public class RubyController : MonoBehaviour
         animator.SetFloat("Look Y", lookDirection.y);
         animator.SetFloat("Speed", move.magnitude);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.C))
             LaunchProjectile();
         
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 1.5f, 1 << LayerMask.NameToLayer("NPC"));
             if (hit.collider != null)
@@ -92,6 +95,7 @@ public class RubyController : MonoBehaviour
                 NonPlayerCharacter character = hit.collider.GetComponent<NonPlayerCharacter>();
                 if (character != null)
                 {
+                    character.GetComponent<AudioSource>().Play();
                     character.DisplayDialog();
                 }  
             }
@@ -180,5 +184,14 @@ public class RubyController : MonoBehaviour
         em.enabled = true;
         healingParticle.Play();
         
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        //BossProjectileOne getBoss = other.gameObject.transform.parent.GetComponent<BossProjectileOne>();
+        if (other.gameObject.transform.parent.tag == "bullet")
+        {
+            ChangeHealth(-1);
+        }
     }
 }

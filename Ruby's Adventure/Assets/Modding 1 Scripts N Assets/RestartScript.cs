@@ -15,7 +15,7 @@ public class RestartScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R)) 
         {
-            Debug.Log("Press");
+            //Debug.Log("Press");
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }

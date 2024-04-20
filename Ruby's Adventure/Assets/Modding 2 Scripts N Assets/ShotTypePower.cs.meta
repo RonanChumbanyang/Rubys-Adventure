@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 4465b84b98446d54388cb5ab67b9aadf
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - projectilePrefabNEW: {fileID: 540222671576581450, guid: 4976726a9e0b61c449e7999e67501b1b,
+      type: 3}
+  - meter: {instanceID: 0}
+  - meterUIs: {fileID: 6441736559648639409, guid: 9470bbb318d7383439562d59fd280f24,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

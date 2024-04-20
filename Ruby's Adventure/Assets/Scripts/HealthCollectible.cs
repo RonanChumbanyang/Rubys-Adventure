@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HealthCollectible : MonoBehaviour 
 {
+    public int healAmount;
+
     RubyController getRuby;
 
     private void Start()
@@ -17,7 +19,7 @@ public class HealthCollectible : MonoBehaviour
 
         if (controller != null)
         {
-            controller.ChangeHealth(1);
+            controller.ChangeHealth(healAmount);
             getRuby.GainingHealth();
             Destroy(gameObject);
             
