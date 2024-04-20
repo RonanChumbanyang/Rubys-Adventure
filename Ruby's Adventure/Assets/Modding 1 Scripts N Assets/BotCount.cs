@@ -20,7 +20,7 @@ public class BotCount : MonoBehaviour
 
     void Start()
     {
-        count = bots.Length;
+        count = (bots.Length - bots.Length);
 
         
     }
@@ -31,16 +31,16 @@ public class BotCount : MonoBehaviour
         {
             if (bots[i].GetComponent<Enemy>().repaired)
             {
-                count = count - 1;
+                count = count + 1;
                 RemoveAt(ref bots, i);
                 break;
             }
             
         }
 
-        countText.text = "Robots left: " + count.ToString();
+        countText.text = "Robot fixed: " + count.ToString();
         AudioSource audioSource;
-        if (count == 0 && !soundPlayed)
+        if (count == 3 && !soundPlayed)
         {
             
             audioSource = gameObject.GetComponent<AudioSource>();

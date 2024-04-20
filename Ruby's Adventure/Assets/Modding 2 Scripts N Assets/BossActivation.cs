@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossActivation : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class BossActivation : MonoBehaviour
     [Header("ending")]
     public GameObject winUI;
     public GameObject menuPanel;
+    public Text countText;
 
     BossHealth getBoss;
 
@@ -25,6 +27,7 @@ public class BossActivation : MonoBehaviour
     {
         if (getBoss.currentHealth <= 0)
         {
+            countText.text = "Robot fixed: 4";
             backgroundAudio.Stop();
             bossUI.SetActive(false);
             winUI.SetActive(true);
