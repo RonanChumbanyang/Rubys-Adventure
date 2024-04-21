@@ -1,3 +1,4 @@
+//Ronan Chumbanyang's script
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,10 +12,12 @@ public class ShotTypePower : MonoBehaviour
 
     public Slider meter;
     public GameObject meterUIs;
+    public AudioSource newShootingSound;
 
     void Start()
     {
         rigidbody2d = transform.parent.GetComponent<Rigidbody2D>();
+        newShootingSound = gameObject.GetComponent<AudioSource>();
 
     }
     private void OnEnable()
@@ -45,6 +48,7 @@ public class ShotTypePower : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
         {
             LaunchProjectile();
+            newShootingSound.PlayOneShot(newShootingSound.clip);
         }
 
         float horizontal = Input.GetAxis("Horizontal");
